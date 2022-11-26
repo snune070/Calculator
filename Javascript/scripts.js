@@ -1,3 +1,15 @@
+const toDisplay = document.querySelectorAll('.numbers');
+let currentDisplay = document.querySelector('.current')
+
+
+for (let toDisplayElement of toDisplay) {
+    toDisplayElement.addEventListener('click', function (){
+        currentDisplay.textContent += `${toDisplayElement.innerText}`
+    })
+}
+
+
+
 function add(x, y) {
     return x + y;
 }
