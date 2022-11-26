@@ -1,13 +1,24 @@
 const toDisplay = document.querySelectorAll('.numbers');
+const eraseDisplay = document.querySelector('.clear')
+const deleteInput = document.querySelector('.delete')
+
 let currentDisplay = document.querySelector('.current')
 
+eraseDisplay.addEventListener('click', function () {
+    currentDisplay.textContent = '';
+})
+
+deleteInput.addEventListener('click', function () {
+    console.log(currentDisplay.textContent)
+    currentDisplay.textContent = currentDisplay.textContent.substring(0, currentDisplay.textContent.length - 1)
+    console.log(currentDisplay.textContent)
+})
 
 for (let toDisplayElement of toDisplay) {
-    toDisplayElement.addEventListener('click', function (){
+    toDisplayElement.addEventListener('click', function () {
         currentDisplay.textContent += `${toDisplayElement.innerText}`
     })
 }
-
 
 
 function add(x, y) {
