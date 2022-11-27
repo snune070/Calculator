@@ -2,10 +2,12 @@ const numbers = document.querySelectorAll('.numbers');
 const eraseDisplay = document.querySelector('.clear');
 const deleteInput = document.querySelector('.delete');
 const operations = document.querySelectorAll('.operations');
+const evaluateExpression = document.querySelector('#equal')
 
-
-let fistInput = document.querySelector('.current');
-let secondInput = document.querySelector('.current')
+let currentCalculation = null;
+let toReset = false;
+let firstInput = document.querySelector('.current');
+let secondInput = document.querySelector('.current');
 
 const currentDisplay = document.querySelector('.current');
 const previousDisplay = document.querySelector('.last');
@@ -17,14 +19,22 @@ deleteInput.addEventListener('click', () => deleteFromDisplay());
 numbers.forEach(button => button.addEventListener('click', () => appendToDisplay(button.textContent)))
 
 operations.forEach(button => button.addEventListener('click', () => {
-    chooseOperation(button.textContent);
+    determineOperation(button.textContent);
 }))
+
+evaluateExpression.addEventListener('click', () => evaluateOperation())
 
 function clearDisplay() {
     currentDisplay.textContent = '';
     previousDisplay.textContent = '';
+    toReset = false
+    currentCalculation = null;
 }
 
+function reset() {
+    currentDisplay.textContent = '';
+    toReset = false;
+}
 
 function deleteFromDisplay() {
     currentDisplay.innerText = currentDisplay.innerText.substring(0, currentDisplay.innerText.length - 1);
@@ -34,27 +44,51 @@ function deleteFromDisplay() {
 function appendToDisplay(input) {
     if (input === '.' && currentDisplay.textContent.includes('.'))
         return;
+    if (toReset) {
+        reset()
+        toReset = false;
+    }
     currentDisplay.textContent += input;
 
 }
 
 
-function chooseOperation(operation) {
+function determineOperation(operation) {
+
+    if (currentCalculation !== null)
+        evaluateOperation();
+
     if (currentDisplay.textContent === '')
         return
-    if (previousDisplay.textContent !== '') {
-        secondInput.textContent = currentDisplay.textContent;
-        let operationOutput = evaluateOperation(operation, firstInput, secondInput.textContent)
-        appendToDisplay(operationOutput)
-    }
+
+    currentCalculation = operation;
     firstInput = currentDisplay.textContent;
-    previousDisplay.textContent = `${fistInput.textContent} ${operation}`;
-    currentDisplay.textContent = '';
+    previousDisplay.textContent = `${firstInput} ${currentCalculation}`
+    toReset = true;
+
 }
 
-function evaluateOperation(operand, x, y) {
+function evaluateOperation() {
 
-    currentDisplay.textContent = '';
+    if (!toReset)
+        toReset = true;
+    secondInput = currentDisplay.textContent;
+    currentDisplay.textContent = roundNumber((calculateOutput(currentCalculation, firstInput, secondInput)))
+    previousDisplay.textContent = `${currentDisplay.textContent} =`
+    currentCalculation = null;
+
+}
+
+function roundNumber(roundedNumber) {
+     roundedNumber = Math.round(calculateOutput(currentCalculation, firstInput, secondInput) * 1000) / 1000;
+    return roundedNumber;
+}
+
+
+function calculateOutput(operand, x, y) {
+
+    x = Number(x)
+    y = Number(y);
 
     switch (operand) {
         case "+":
@@ -69,19 +103,33 @@ function evaluateOperation(operand, x, y) {
 
 }
 
+
 function add(x, y) {
-    return parseInt(x) + parseInt(y);
+    return x + y;
 }
 
 function subtract(x, y) {
-    return parseInt(x) - parseInt(y);
+    return x - y;
 }
 
 function multiply(x, y) {
-    return parseInt(x) * parseInt(y);
+    return x * y;
 }
 
 function divide(x, y) {
-    return parseInt(x) / parseInt(y);
+    return x / y;
 }
 
+/*
+if(currentCalculation !== null)
+
+    if (currentDisplay.textContent === '')
+        return
+if (previousDisplay.textContent !== '') {
+    secondInput.textContent = currentDisplay.textContent;
+    let operationOutput = evaluateOperation(operation, firstInput.textContent, secondInput.textContent)
+    appendToDisplay(operationOutput)
+}
+firstInput.textContent = currentDisplay.textContent;
+previousDisplay.textContent = `${firstInput.textContent} ${operation}`;
+currentDisplay.textContent = '';*/
