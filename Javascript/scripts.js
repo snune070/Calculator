@@ -39,24 +39,22 @@ function appendToDisplay(input) {
 }
 
 
-/*function chooseOperation(operation){
-    if(currentDisplay.textContent === '')
+function chooseOperation(operation) {
+    if (currentDisplay.textContent === '')
         return
-    if(previousDisplay.textContent !== ''){
-        secondInput.textContent = currentDisplay.textContent
-        appendToDisplay(evaluateOperation(operation, fistInput, secondInput))
+    if (previousDisplay.textContent !== '') {
+        secondInput.textContent = currentDisplay.textContent;
+        let operationOutput = evaluateOperation(operation, firstInput, secondInput.textContent)
+        appendToDisplay(operationOutput)
     }
     firstInput = currentDisplay.textContent;
     previousDisplay.textContent = `${fistInput.textContent} ${operation}`;
     currentDisplay.textContent = '';
-}*/
+}
 
 function evaluateOperation(operand, x, y) {
 
-    currentDisplay.textContent = ''
-
-    x = Number(x)
-    y = Number(y)
+    currentDisplay.textContent = '';
 
     switch (operand) {
         case "+":
@@ -72,18 +70,18 @@ function evaluateOperation(operand, x, y) {
 }
 
 function add(x, y) {
-    return x + y;
+    return parseInt(x) + parseInt(y);
 }
 
 function subtract(x, y) {
-    return x - y;
+    return parseInt(x) - parseInt(y);
 }
 
 function multiply(x, y) {
-    return x * y;
+    return parseInt(x) * parseInt(y);
 }
 
 function divide(x, y) {
-    return x / y;
+    return parseInt(x) / parseInt(y);
 }
 
