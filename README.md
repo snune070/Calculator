@@ -1,5 +1,11 @@
 # Calculator
 
+## Description
+  
+This project focused on the culmination of the css, javascript, and html skills that  
+have been acquired so far. To create a 
+
+
 # Plan
 
 1. Operations

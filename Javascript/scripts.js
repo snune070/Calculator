@@ -73,6 +73,7 @@ function evaluateOperation() {
     if (!toReset)
         toReset = true;
     secondInput = currentDisplay.textContent;
+
     currentDisplay.textContent = roundNumber((calculateOutput(currentCalculation, firstInput, secondInput)))
     previousDisplay.textContent = `${currentDisplay.textContent} =`
     currentCalculation = null;
@@ -117,6 +118,7 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
+    if(y === 0) return alert("Can't divide by zero, clear calculator");
     return x / y;
 }
 
