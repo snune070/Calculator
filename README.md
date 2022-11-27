@@ -3,17 +3,18 @@
 ## Description
   
 This project focused on the culmination of the css, javascript, and html skills that  
-have been acquired so far. To create a 
+have been acquired so far. To create an on-screen calculator with keyboard support.  
 
 
-# Plan
 
-1. Operations
+# Outline
+
+1. Calculator Operations
     1. Add
     2. Subtract
     3. Multiply
     4. Divide
-   5. Operate
+    5. Operate
 
 
 * Functions
@@ -24,7 +25,6 @@ have been acquired so far. To create a
   * Round answers
   * Backspace Button
   * Clear Button that clears display
-  * All Clear Button that resets operations
 
 
 * Design
@@ -32,6 +32,6 @@ have been acquired so far. To create a
   * grouped into numbers, and operations
   * div container for the grid
   * top item will be display that stretches the entire row
-    * Display will also be flexbox
+   
   
     
